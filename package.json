@@ -1,7 +1,10 @@
 {
   "name": "icrs-root",
   "private": true,
+  "workspaces": [
+    "icrs"
+  ],
   "scripts": {
-    "build": "npm --prefix icrs install && npm --prefix icrs run build"
+    "build": "npm run build --workspace icrs"
   }
 }
