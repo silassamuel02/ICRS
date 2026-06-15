@@ -1,6 +1,7 @@
 node_modules/
 .dist/
 .vite/
+dist/
 coverage/
 backend/target/
 backend/.idea/
