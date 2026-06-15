@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: icrs-backend
+    env: java
+    plan: free
+    region: oregon
+    rootDir: backend
+    buildCommand: ./mvnw -q -DskipTests package
+    startCommand: java -jar target/*.jar
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: JAVA_VERSION
+        value: 17
+      - key: DB_URL
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: FRONTEND_URL
+        value: https://your-vercel-app.vercel.app
