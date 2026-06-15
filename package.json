@@ -1,0 +1,7 @@
+{
+  "name": "icrs-root",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix icrs install && npm --prefix icrs run build"
+  }
+}
