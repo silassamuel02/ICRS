@@ -6,6 +6,7 @@ import React, {
   useCallback,
 } from 'react';
 import axios from 'axios';
+import api from '../api/client';
 import type { User } from '../types';
 
 interface AuthContextType {
@@ -48,10 +49,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     password: string
   ): Promise<User> => {
     // 1️⃣ Login → get raw JWT
-    const loginResponse = await axios.post(
-      'http://localhost:8080/api/auth/login',
-      { email, password }
-    );
+    const loginResponse = await api.post('/auth/login', { email, password });
 
     const receivedToken = loginResponse.data;
 
@@ -67,9 +65,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     ] = `Bearer ${receivedToken}`;
 
     // 2️⃣ Fetch profile
-    const profileResponse = await axios.get(
-      'http://localhost:8080/api/users/me'
-    );
+    const profileResponse = await api.get('/users/me');
 
     const fullUser: User = profileResponse.data;
 
@@ -81,10 +77,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const register = async (data: any): Promise<void> => {
     // 1️⃣ Register → usually backend creates a user and optionally returns a JWT or success message
-    const registerResponse = await axios.post(
-      'http://localhost:8080/api/auth/register',
-      data
-    );
+    const registerResponse = await api.post('/auth/register', data);
 
     // If the backend requires a login after registration, we just return void.
     // If it returns a token upon registration, we can login the user immediately here.
